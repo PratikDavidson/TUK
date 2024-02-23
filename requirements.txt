@@ -1,0 +1,5 @@
+fitz==0.0.1.dev2
+llama_index==0.10.12
+numpy==1.26.4
+streamlit==1.31.1
+trulens_eval==0.23.0
