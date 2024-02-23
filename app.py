@@ -6,9 +6,10 @@ import backend as K
 
 st.set_page_config(page_title="TUK", layout="wide")
 
-if 'options' not in st.session_state and 'trulens_feedback_score' not in st.session_state:
+if 'options' not in st.session_state and 'trulens_feedback_score' not in st.session_state and 'pdf' not in st.session_state:
     st.session_state['options'] = [] 
     st.session_state['trulens_feedback_score'] = {}
+    st.session_state['pdf'] = None
 
 sidebar = st.sidebar
 header = st.container()
@@ -39,13 +40,13 @@ with header:
     st.subheader('', divider='gray')
 
 with body:
-    pdf_viewer, _, tuk_section = st.columns(3)
+    pdf_display, _, tuk_section = st.columns(3)
 
-    with pdf_viewer:
+    with pdf_display:
         st.subheader('PDF viewer')
-        if uploaded_file is not None:
+        if uploaded_file:
             base64_pdf = base64.b64encode(file_reader).decode('utf-8')
-            pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="650" height="800" type="application/pdf"></iframe>'
+            pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="650" height="800" type="application/pdf">'
             st.markdown(pdf_display, unsafe_allow_html=True)
     
     with tuk_section:
